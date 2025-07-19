@@ -8,10 +8,11 @@
 #include <mutex>
 #include <thread>
 
+
 class Logger 
 {
 public:
-    enum Level { DEBUG, INFO, WARN, ERROR };
+    enum Level { DEBUG, INFO, WARN, ERR };
 
     Logger(Level level, const char* file, int line)
         : level_(level) 
@@ -59,7 +60,7 @@ private:
             case DEBUG: return "DEBUG"; 
             case INFO:  return "INFO"; 
             case WARN:  return "WARN"; 
-            case ERROR: return "ERROR"; 
+            case ERR:   return "ERR"; 
             default:    return "UNKNOWN";
         }
     }
@@ -72,4 +73,4 @@ private:
 #define DLOG Logger(Logger::DEBUG, __FILE__, __LINE__)
 #define ILOG Logger(Logger::INFO,  __FILE__, __LINE__)
 #define WLOG Logger(Logger::WARN,  __FILE__, __LINE__)
-#define ELOG Logger(Logger::ERROR, __FILE__, __LINE__)
+#define ELOG Logger(Logger::ERR,   __FILE__, __LINE__)

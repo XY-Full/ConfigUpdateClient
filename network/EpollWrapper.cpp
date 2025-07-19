@@ -1,4 +1,6 @@
 #include "EpollWrapper.h"
+#ifdef _WIN32
+#else
 #include <sys/epoll.h>
 #include <unistd.h>
 
@@ -36,3 +38,4 @@ std::vector<int> EpollWrapper::wait(int timeout_ms)
     }
     return result;
 }
+#endif

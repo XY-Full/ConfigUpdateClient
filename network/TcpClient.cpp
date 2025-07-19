@@ -13,9 +13,9 @@
 #endif
 
 TcpClient::TcpClient(const std::string& ip, int port,
-                     Channel<std::shared_ptr<NetPack>>* in,
-                     Channel<std::shared_ptr<NetPack>>* out,
-                     Timer* timer)
+                Channel < std::pair<int64_t, std::shared_ptr<NetPack>> >* in,
+                Channel < std::pair<int64_t, std::shared_ptr<NetPack>> >* out,
+                Timer* timer)
     : ip_(ip), port_(port), recv_channel_(in), send_channel_(out), timer_(timer)
 {
 #ifdef _WIN32
@@ -110,7 +110,7 @@ void TcpClient::recvLoop()
 
         auto netpack = std::make_shared<NetPack>();
         netpack->deserialize(0, msg);
-        recv_channel_->push(netpack);
+        recv_channel_->push({ netpack->conn_id , netpack });
         last_active_time_ = std::chrono::steady_clock::now();
     }
 }
@@ -118,7 +118,7 @@ void TcpClient::recvLoop()
 void TcpClient::sendLoop()
 {
     while (running_) {
-        auto msg = send_channel_->pop();
+        auto [conn_id, msg] = send_channel_->pop();
         socket_->sendAll(*msg->serialize());
     }
 }

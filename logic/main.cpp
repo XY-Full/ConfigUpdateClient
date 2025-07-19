@@ -1,3 +1,4 @@
+#ifdef TEST
 #include <iostream>
 #include <string>
 #include <cstring>
@@ -75,3 +76,4 @@ int main1() {
     close(sock);
     return 0;
 }
+#endif

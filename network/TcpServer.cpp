@@ -1,3 +1,4 @@
+#ifdef SERVER_MODE
 #include "TcpServer.h"
 #include <netinet/in.h>
 #include <sys/socket.h>
@@ -161,3 +162,4 @@ void TcpServer::outConsumerLoop()
         }
     }
 }
+#endif

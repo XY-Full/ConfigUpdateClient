@@ -1,4 +1,6 @@
 #pragma once
+#ifdef _WIN32
+#else
 #include <vector>
 
 class EpollWrapper 
@@ -14,3 +16,4 @@ public:
 private:
     int epoll_fd_;
 };
+#endif

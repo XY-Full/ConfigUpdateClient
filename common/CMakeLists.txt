@@ -4,7 +4,10 @@ file(GLOB COMMON_CPP_FILES "${CMAKE_CURRENT_LIST_DIR}/*.cpp")
 # 生成静态库
 add_library(common STATIC
     ${COMMON_CPP_FILES}
-    ${PROTO_CC_FILES}
+)
+
+set_target_properties(common PROPERTIES
+    MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Release>:Release>"
 )
 
 # 添加头文件搜索路径

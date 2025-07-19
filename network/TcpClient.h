@@ -17,8 +17,8 @@
 class TcpClient {
 public:
     TcpClient(const std::string& ip, int port,
-              Channel<std::shared_ptr<NetPack>>* in,
-              Channel<std::shared_ptr<NetPack>>* out,
+              Channel < std::pair<int64_t, std::shared_ptr<NetPack>> >* in,
+              Channel < std::pair<int64_t, std::shared_ptr<NetPack>> >* out,
               Timer* timer);
 
     ~TcpClient();
@@ -37,8 +37,8 @@ private:
     int sock_ = -1;
 
     std::unique_ptr<SocketWrapper> socket_;
-    Channel<std::shared_ptr<NetPack>>* recv_channel_;
-    Channel<std::shared_ptr<NetPack>>* send_channel_;
+    Channel< std::pair<int64_t, std::shared_ptr<NetPack>> >* recv_channel_;
+    Channel< std::pair<int64_t, std::shared_ptr<NetPack>> >* send_channel_;
     Timer* timer_;
 
     std::atomic<bool> running_ = false;

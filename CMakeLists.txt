@@ -1,12 +1,21 @@
 cmake_minimum_required(VERSION 3.10)
+if (POLICY CMP0091)
+  cmake_policy(SET CMP0091 NEW)
+endif (POLICY CMP0091)
+
 project(ConfigUpdate)
 set(CMAKE_CXX_STANDARD 17)
 
-# Protobuf 路径
-set(PROTOBUF_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/protobuf/include)
-set(PROTOBUF_LIB_DIR     ${CMAKE_SOURCE_DIR}/protobuf/lib)
-link_directories(${PROTOBUF_LIB_DIR})
-include_directories(${PROTOBUF_INCLUDE_DIR})
+#find_library(PROTOBUF_LIB NAMES libprotobuf PATHS ${PROTOBUF_LIB_DIR})
+
+# 添加头文件搜索路径
+include_directories(
+    ${CMAKE_SOURCE_DIR}/logic
+    ${CMAKE_SOURCE_DIR}/protobuf/include
+    ${CMAKE_SOURCE_DIR}/protobuf/proto_files
+    ${CMAKE_SOURCE_DIR}/common
+    ${CMAKE_SOURCE_DIR}/network
+)
 
 # 各子模块
 add_subdirectory(network)
@@ -16,9 +25,12 @@ add_subdirectory(protobuf)
 
 # 可执行文件
 add_executable(server main.cpp)
+
+target_link_directories(server PRIVATE ${CMAKE_SOURCE_DIR}/protobuf/lib)
+
 target_link_libraries(server
     PRIVATE network
             common
-            logic_modules
+            logic
             proto
 )

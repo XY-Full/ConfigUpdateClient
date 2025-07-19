@@ -49,7 +49,7 @@ bool SocketWrapper::recvAll(std::string& out, size_t size, bool use_peek)
     while (out.size() < size) 
     {
         char buf[1024];
-        size_t to_read = std::min(sizeof(buf), size - out.size());
+        size_t to_read = min(sizeof(buf), size - out.size());
 
         int flags = use_peek ? MSG_PEEK : 0;
         int n = ::recv(sock_fd_, buf, static_cast<int>(to_read), flags);

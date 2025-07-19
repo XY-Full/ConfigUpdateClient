@@ -7,5 +7,9 @@ add_library(logic STATIC
     ${LOGIC_SRC}
 )
 
+set_target_properties(logic PROPERTIES
+    MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Release>:Release>"
+)
+
 target_include_directories(logic PUBLIC)
-target_link_libraries(logic PUBLIC pthread common)
+target_link_libraries(logic PUBLIC common)
