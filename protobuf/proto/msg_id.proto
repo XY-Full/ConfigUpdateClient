@@ -1,0 +1,8 @@
+syntax = "proto3";
+package MSGID;
+
+enum MsgID
+{
+    CS_HEART_BEAT       = 0; // 心跳
+    CS_CONFIG_UPDATE    = 1; // 配置更新
+}

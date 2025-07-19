@@ -1,0 +1,7 @@
+C:/Users/17392/Desktop/ConfigUpdateClient/build/CMakeFiles/server.dir
+C:/Users/17392/Desktop/ConfigUpdateClient/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/17392/Desktop/ConfigUpdateClient/build/CMakeFiles/ZERO_CHECK.dir
+C:/Users/17392/Desktop/ConfigUpdateClient/build/network/CMakeFiles/network.dir
+C:/Users/17392/Desktop/ConfigUpdateClient/build/logic/CMakeFiles/logic.dir
+C:/Users/17392/Desktop/ConfigUpdateClient/build/common/CMakeFiles/common.dir
+C:/Users/17392/Desktop/ConfigUpdateClient/build/protobuf/CMakeFiles/proto.dir

@@ -1,0 +1,19 @@
+syntax = "proto3";
+package cs;
+import "base.proto";
+
+message ConfigUpdate
+{
+    message Request
+    {
+        repeated string update_file = 1;
+    }
+
+    message Response
+    {
+        int32   err = 1;
+    }
+
+    Request     request     = 1;
+    Response    response    = 2;
+}

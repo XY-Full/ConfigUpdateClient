@@ -1,0 +1,10 @@
+^C:\USERS\17392\DESKTOP\CONFIGUPDATECLIENT\COMMON\CMAKELISTS.TXT
+setlocal
+D:\CppTools\CMake\bin\cmake.exe -SC:/Users/17392/Desktop/ConfigUpdateClient -BC:/Users/17392/Desktop/ConfigUpdateClient/build --check-stamp-file C:/Users/17392/Desktop/ConfigUpdateClient/build/common/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
