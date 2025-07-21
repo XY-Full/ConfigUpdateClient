@@ -1,16 +1,18 @@
-#include "TcpClient.h"
+#include "ConfigClient.h"
 #include "NetPack.h"
 #include "Timer.h"
 #include <memory>
 #include <string>
+#include <windows.h>
 
-Channel < std::pair<int64_t, std::shared_ptr<NetPack>> > in_channel_;
-Channel < std::pair<int64_t, std::shared_ptr<NetPack>> > out_channel_;
-Timer timer_;
 
 int32_t main()
 {
+    SetConsoleCP(CP_UTF8);
+    SetConsoleOutputCP(CP_UTF8);
+
     const std::string addr = "192.168.5.123";
-    TcpClient client(addr, 8887, &in_channel_, &out_channel_, &timer_);
+    ConfigClient client(addr, 8887);
     client.start();
+    client.join();
 }
