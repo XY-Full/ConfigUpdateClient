@@ -14,7 +14,7 @@ add_library(network STATIC
 )
 
 set_target_properties(network PROPERTIES
-    MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Release>:Release>"
+    MSVC_RUNTIME_LIBRARY "MultiThreaded"
 )
 
 target_include_directories(network PUBLIC)

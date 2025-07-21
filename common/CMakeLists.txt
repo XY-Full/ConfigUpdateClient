@@ -7,7 +7,7 @@ add_library(common STATIC
 )
 
 set_target_properties(common PROPERTIES
-    MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Release>:Release>"
+    MSVC_RUNTIME_LIBRARY "MultiThreaded"
 )
 
 # 添加头文件搜索路径

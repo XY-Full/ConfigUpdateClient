@@ -2,10 +2,6 @@ file(GLOB PROTO_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/proto_files/*.cc")
 
 add_library(proto ${PROTO_SRCS})
 
-set_target_properties(proto PROPERTIES
-    MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Release>:Release>"
-)
-
 # Protobuf 路径
 set(PROTOBUF_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/protobuf/include)
 set(PROTOBUF_LIB_DIR     ${CMAKE_SOURCE_DIR}/protobuf/lib)
@@ -17,5 +13,9 @@ target_include_directories(proto
                             ${CMAKE_SOURCE_DIR}/protobuf/include
                             ${CMAKE_SOURCE_DIR}/protobuf/proto_files
                             )
+
+set_target_properties(proto PROPERTIES
+    MSVC_RUNTIME_LIBRARY "MultiThreaded"
+)
                             
 target_include_directories(proto PUBLIC libprotobuf)
