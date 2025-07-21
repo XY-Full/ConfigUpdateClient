@@ -24,11 +24,15 @@ add_subdirectory(common)
 add_subdirectory(protobuf)
 
 # 可执行文件
-add_executable(server main.cpp)
+add_executable(client main.cpp)
 
-target_link_directories(server PRIVATE ${CMAKE_SOURCE_DIR}/protobuf/lib)
+target_link_directories(client PRIVATE ${CMAKE_SOURCE_DIR}/protobuf/lib)
 
-target_link_libraries(server
+set_target_properties(client PROPERTIES
+    MSVC_RUNTIME_LIBRARY "MultiThreaded"
+)
+
+target_link_libraries(clientsss
     PRIVATE network
             common
             logic
