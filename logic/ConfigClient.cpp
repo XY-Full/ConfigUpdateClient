@@ -7,6 +7,7 @@
 #include "gate.pb.h"
 #include "msg_id.pb.h"
 #include "notify.pb.h"
+#include "err_code.pb.h"
 
 ConfigClient::ConfigClient(const std::string& host, uint16_t port)
     : host_(host), port_(port), running_(false)
@@ -81,7 +82,7 @@ void ConfigClient::handleUserChoice(int choice)
         case 1: 
         {
             cs::ConfigUpdate req;
-            req.mutable_request()->add_update_file("update");
+            req.mutable_request()->add_update_file("运营/拍脸礼包.xlsx");
 
             pack->msg_id = MSGID::CS_CONFIG_UPDATE;
             req.SerializeToString(&pack->msg);
@@ -118,7 +119,8 @@ void ConfigClient::receiveLoop()
     }
 }
 
-void ConfigClient::heartLoop() {
+void ConfigClient::heartLoop() 
+{
     while (running_) 
     {
         std::this_thread::sleep_for(std::chrono::seconds(10));
@@ -136,8 +138,10 @@ void ConfigClient::heartLoop() {
     }
 }
 
-void ConfigClient::handleServerResponse(const std::shared_ptr<NetPack>& pack) {
-    switch (pack->msg_id) {
+void ConfigClient::handleServerResponse(const std::shared_ptr<NetPack>& pack) 
+{
+    switch (pack->msg_id) 
+    {
         case MSGID::CS_HEART_BEAT: 
         {
             // ILOG  << "heart!";
@@ -148,7 +152,11 @@ void ConfigClient::handleServerResponse(const std::shared_ptr<NetPack>& pack) {
             cs::ConfigUpdate resp;
             if (resp.ParseFromString(pack->msg)) 
             {
-                std::cout << "ok!" << "\n";
+                if(resp.response().err() != ErrorCode::Error_success)
+                {
+                    std::cout << "err: " << ErrorCode::ErrorCode_Name(resp.response().err()) << "\n";
+                }
+                std::cout << "配置更新成功!" << "\n";
             } 
             break;
         }

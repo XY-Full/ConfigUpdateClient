@@ -117,7 +117,8 @@ void TcpClient::recvLoop()
 
 void TcpClient::sendLoop()
 {
-    while (running_) {
+    while (running_) 
+    {
         auto [conn_id, msg] = send_channel_->pop();
         socket_->sendAll(*msg->serialize());
     }
@@ -126,7 +127,8 @@ void TcpClient::sendLoop()
 void TcpClient::checkHeartbeat()
 {
     auto now = std::chrono::steady_clock::now();
-    if (std::chrono::duration_cast<std::chrono::seconds>(now - last_active_time_).count() > HEARTBEAT_TIMEOUT_SECONDS) {
+    if (std::chrono::duration_cast<std::chrono::seconds>(now - last_active_time_).count() > HEARTBEAT_TIMEOUT_SECONDS) 
+    {
         ELOG << "Heartbeat timeout. Reconnecting...";
         stop();
         start();
