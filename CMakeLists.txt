@@ -32,7 +32,7 @@ set_target_properties(client PROPERTIES
     MSVC_RUNTIME_LIBRARY "MultiThreaded"
 )
 
-target_link_libraries(clientsss
+target_link_libraries(client
     PRIVATE network
             common
             logic
