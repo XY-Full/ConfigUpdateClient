@@ -23,8 +23,23 @@ add_subdirectory(logic)
 add_subdirectory(common)
 add_subdirectory(protobuf)
 
+# 设置exe图标
+if (WIN32)
+    set(WIN_RESOURCES icon/icon.rc)
+endif()
+
 # 可执行文件
-add_executable(client main.cpp)
+add_executable(client main.cpp ${WIN_RESOURCES})
+
+# 设置可执行文件名称
+set_target_properties(client PROPERTIES OUTPUT_NAME "client")
+
+# 编译完后执行拷贝命令
+add_custom_command(TARGET client POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy
+        "$<TARGET_FILE:client>"
+        "${CMAKE_SOURCE_DIR}/更新服务端配置.exe"
+)
 
 target_link_directories(client PRIVATE ${CMAKE_SOURCE_DIR}/protobuf/lib)
 
