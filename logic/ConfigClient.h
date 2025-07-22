@@ -7,6 +7,10 @@
 #include <atomic>
 #include <memory>
 #include <utility>
+#include "JsonConfig.h"
+#include "JsonConfigNode.h"
+
+class JsonConfig;
 
 class ConfigClient 
 {
@@ -38,4 +42,5 @@ private:
 
     std::thread input_thread_;
     std::thread receive_thread_;
+    JsonConfig configMaker_;
 };
